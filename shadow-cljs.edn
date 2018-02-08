@@ -17,6 +17,8 @@
                            :require "nervjs"}
                   "react-dom" {:target :npm
                                :require "nervjs"}
+                  "react-dom/server" {:target :npm
+                                      :require "nerv-server/dist/index.js"}
                   "create-react-class" {:target :npm
                                         :require "nerv-create-class/dist/index.js"}}}
                 
