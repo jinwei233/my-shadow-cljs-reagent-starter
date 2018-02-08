@@ -19,5 +19,6 @@
                 :modules {:main {:entries [starter.core]}}
                 :devtools {:before-load starter.core/stop
                            :after-load starter.core/start
+                           :watch-dir "public"
                            :http-root "public"
                            :http-port 8020}}}}
