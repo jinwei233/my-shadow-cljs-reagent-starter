@@ -14,11 +14,11 @@
                 :js-options
                 {:resolve
                  {"react" {:target :npm
-                           :require "qreact"}
+                           :require "nervjs"}
                   "react-dom" {:target :npm
-                               :require "qreact"}
+                               :require "nervjs"}
                   "create-react-class" {:target :npm
-                                        :require "qreact/lib/createClass"}}}
+                                        :require "nerv-create-class/dist/index.js"}}}
                 
                 :output-dir "public/js"
                 :asset-path "js"
