@@ -1,5 +1,6 @@
 (ns starter.core
-  (:require [reagent.core :as r]))
+  (:require [reagent.core :as r]
+            [react-dom :as dom]))
 
 (defonce greeting "hello")
 
@@ -13,8 +14,11 @@
 
 (defn start []
   (js/console.log "Starting...")
+  (js/console.log "jinwei...")
   (r/render [app]
             (.getElementById js/document "app")))
 
 (defn ^:export init []
+  (js/console.log "hello world")
+  (js/console.log dom)
   (start))

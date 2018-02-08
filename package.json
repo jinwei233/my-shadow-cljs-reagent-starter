@@ -7,11 +7,13 @@
   "dependencies": {
     "create-react-class": "^15.6.2",
     "nerv-create-class": "^1.2.10",
+    "nerv-server": "^1.2.9",
     "nervjs": "^1.2.10",
+    "qreact": "^2.0.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "shadow-cljs": "^2.0.115"
+    "shadow-cljs": "^2.1.4"
   }
 }

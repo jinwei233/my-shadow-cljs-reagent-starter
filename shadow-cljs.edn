@@ -1,8 +1,25 @@
 {:source-paths ["src"]
 
- :dependencies [[reagent "0.8.0-alpha2"]]
-
+ :dependencies [;; [reagent "0.8.0-alpha2"
+                ;;  ;; :exclusions
+                ;;  ;; [cljsjs/react
+                ;;  ;;  cljsjs/react-dom
+                ;;  ;;  cljsjs/create-react-class
+                ;;  ;;  cljsjs/react-dom-server]
+                ;;  ]
+                ]
+ 
  :builds {:app {:target :browser
+                
+                :js-options
+                {:resolve
+                 {"react" {:target :npm
+                           :require "qreact"}
+                  "react-dom" {:target :npm
+                               :require "qreact"}
+                  "create-react-class" {:target :npm
+                                        :require "qreact/lib/createClass"}}}
+                
                 :output-dir "public/js"
                 :asset-path "js"
                 :modules {:main {:entries [starter.core]}}
