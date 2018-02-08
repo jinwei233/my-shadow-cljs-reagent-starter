@@ -1,13 +1,6 @@
 {:source-paths ["src"]
 
- :dependencies [;; [reagent "0.8.0-alpha2"
-                ;;  ;; :exclusions
-                ;;  ;; [cljsjs/react
-                ;;  ;;  cljsjs/react-dom
-                ;;  ;;  cljsjs/create-react-class
-                ;;  ;;  cljsjs/react-dom-server]
-                ;;  ]
-                ]
+ :dependencies [[reagent "0.8.0-alpha2"]]
  
  :builds {:app {:target :browser
                 
@@ -21,7 +14,6 @@
                                       :require "nerv-server/dist/index.js"}
                   "create-react-class" {:target :npm
                                         :require "nerv-create-class/dist/index.js"}}}
-                
                 :output-dir "public/js"
                 :asset-path "js"
                 :modules {:main {:entries [starter.core]}}
