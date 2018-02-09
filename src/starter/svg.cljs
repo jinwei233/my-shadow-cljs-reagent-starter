@@ -1,6 +1,6 @@
 (ns starter.svg)
 
-(defn concentric-circles []
+(defn clojure-icon-svg []
   [:svg {:style {:border "1px solid"
                  :background "white"
                  :width "150px"
