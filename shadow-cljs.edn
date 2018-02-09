@@ -1,6 +1,7 @@
 {:source-paths ["src"]
 
- :dependencies [[reagent "0.8.0-alpha2"]]
+ :dependencies [[reagent "0.8.0-alpha2"]
+                [hiccup-bridge "1.0.1"]]
  
  :builds {:app {:target :browser
                 
