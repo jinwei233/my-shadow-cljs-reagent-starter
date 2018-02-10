@@ -1,6 +1,10 @@
+;; TODO modal
+;; 单例模式、多例
+;; API 设计
 (ns starter.core
   (:require [reagent.core :as r]
             [starter.util :as util]
+            [starter.purecss.table :refer [table-demo]]
             [reagent.debug :as debug]
             [starter.svg :refer [clojure-icon-svg]])
   (:require-macros [util.core :refer [load-file-in-compile embed-svg]]))
@@ -11,8 +15,7 @@
 
 (defn app []
   [:div
-   (react-svg)
-   [clojure-icon-svg]])
+   [table-demo]])
 
 (defn stop []
   (js/console.log "Stopping..."))
