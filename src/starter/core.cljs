@@ -24,14 +24,14 @@
 ;; https://github.com/flexsurfer/re-frisk
 (ns starter.core
   (:require [reagent.core :as r]
+            ["react" :as react]
             [reagent.debug :as debug]
             [starter.ref :refer [ref-comp]]
             [starter.util :as util]
             [starter.svg :refer [clojure-icon-svg]]))
 
 (defn app []
-  [:div
-   [ref-comp]])
+  [:div "it works"])
 
 (defn stop []
   (js/console.log "Stopping..."))
