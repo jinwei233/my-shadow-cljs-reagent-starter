@@ -3,18 +3,7 @@
  :dependencies [[reagent "0.8.0-alpha2"]
                 [hiccup-bridge "1.0.1"]]
  
- :builds {:app {:target :browser
-                
-                :js-options
-                {:resolve
-                 {"react" {:target :npm
-                           :require "nervjs"}
-                  "react-dom" {:target :npm
-                               :require "nervjs"}
-                  "react-dom/server" {:target :npm
-                                      :require "nerv-server/dist/index.js"}
-                  "create-react-class" {:target :npm
-                                        :require "nerv-create-class/dist/index.js"}}}
+ :builds {:dev {:target :browser
                 :output-dir "public/js"
                 :asset-path "js"
                 :modules {:main {:entries [starter.core]}}
@@ -22,4 +11,37 @@
                            :after-load starter.core/start
                            :watch-dir "public"
                            :http-root "public"
-                           :http-port 8020}}}}
+                           :http-port 8020}}
+          :dev-test {:target :browser
+                     :js-options
+                     {:resolve
+                      {"react" {:target :npm
+                                :require "nervjs"}
+                       "react-dom" {:target :npm
+                                    :require "nervjs"}
+                       "react-dom/server" {:target :npm
+                                           :require "nerv-server/dist/index.js"}
+                       "create-react-class" {:target :npm
+                                             :require "nerv-create-class/dist/index.js"}}}
+                     :output-dir "public/js"
+                     :asset-path "js"
+                     :modules {:main {:entries [starter.core]}}
+                     :devtools {:before-load starter.core/stop
+                                :after-load starter.core/start
+                                :watch-dir "public"
+                                :http-root "public"
+                                :http-port 8020}}
+          :prod {:target :browser
+                 :js-options
+                 {:resolve
+                  {"react" {:target :npm
+                            :require "nervjs"}
+                   "react-dom" {:target :npm
+                                :require "nervjs"}
+                   "react-dom/server" {:target :npm
+                                       :require "nerv-server/dist/index.js"}
+                   "create-react-class" {:target :npm
+                                         :require "nerv-create-class/dist/index.js"}}}
+                 :output-dir "public/js"
+                 :asset-path "js"
+                 :modules {:main {:entries [starter.core]}}}}}

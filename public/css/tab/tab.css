@@ -1,0 +1,27 @@
+.ui-tab {
+  border: 1px solid #ccc;
+}
+
+a.ui-tab-item {
+  display: inline-block;
+  padding: 5px 20px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+a.ui-tab-item:last-child {
+  border-right: 1px solid #ccc;
+}
+
+a.ui-tab-item.active {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+.ui-tab-panel {
+  display: none;
+}
+
+.ui-tab-panel.active {
+  display: block;
+}

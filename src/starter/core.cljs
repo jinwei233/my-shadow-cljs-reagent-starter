@@ -26,12 +26,13 @@
   (:require [reagent.core :as r]
             ["react" :as react]
             [reagent.debug :as debug]
-            [starter.ref :refer [ref-comp]]
+            [starter.tab :refer [tabs-demo]]
             [starter.util :as util]
             [starter.svg :refer [clojure-icon-svg]]))
 
 (defn app []
-  [:div "it works"])
+  [:div
+   [tabs-demo]])
 
 (defn stop []
   (js/console.log "Stopping..."))
