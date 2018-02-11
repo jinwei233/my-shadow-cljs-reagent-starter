@@ -27,12 +27,7 @@
             [reagent.debug :as debug]
             [starter.ref :refer [ref-comp]]
             [starter.util :as util]
-            [starter.svg :refer [clojure-icon-svg]])
-  (:require-macros [util.core :refer [load-file-in-compile embed-svg]]))
-
-(defn react-svg []
-  "reagent svg component from file"
-  (embed-svg "public/svg/react.svg"))
+            [starter.svg :refer [clojure-icon-svg]]))
 
 (defn app []
   [:div
