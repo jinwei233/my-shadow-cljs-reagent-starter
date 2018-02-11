@@ -2,12 +2,13 @@
   (:require [reagent.core :as r]))
 
 (defn- a-div []
-  [:div "this is a div"])
+  (let [this (r/current-component)]
+    [:div (str (r/props this))]))
 
 (defn ref-comp []
   (r/create-class
    {:component-did-mount  
-    #(js/console.log (r/current-component))
+    #(js/console.log "hello")
     :component-will-mount
     #(println "component-will-mount")
     :component-did-update
@@ -19,5 +20,5 @@
     :reagent-render
     (fn []
       ;; (r/current-component)
-      [a-div {:ref #(js/console.log %1)}])}))
+      [a-div {:name "jinwei"}])}))
 
