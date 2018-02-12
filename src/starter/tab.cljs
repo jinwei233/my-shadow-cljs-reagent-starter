@@ -22,13 +22,22 @@
        (add-class item "active")
        item)) arr))
 
+(defn- get-tabs-and-panels [children]
+  (let [[[_ & tabs0] [_ & panels0]] children]
+    [tabs0 panels0]))
+
+(defn- build-tabs-and-panels [children on-click]
+  (let [[tabs0 panels0] (get-tabs-and-panels children)
+        tabs (map-indexed #(into [:a.ui-tab-item {:data-index %1 :on-click on-click}] (rest %2)) tabs0)
+        panels (map-indexed #(into [:div.ui-tab-panel] (rest %2)) panels0)]
+    [tabs panels]))
+
 (defn tabs []
   (let [this (r/current-component)
         props (get-props this)
         {:keys [active on-before-change on-change]} props
         state (r/atom {:current active})
         children (get-children this)
-        [[_ & tabs0] [_ & panels0]] children
         on-click #(let [index (-> (.-currentTarget %1)
                                   (.getAttribute "data-index"))
                         i (js/parseInt index 10)
@@ -39,9 +48,9 @@
                           (when on-change
                             (on-change i j)))
                         (when on-change
-                          (on-change i j)))))
-        tabs (map-indexed #(into [:a.ui-tab-item {:data-index %1 :on-click on-click}] (rest %2)) tabs0)
-        panels (map-indexed #(into [:div.ui-tab-panel] (rest %2)) panels0)]
+                          (on-change i j)))
+                      (swap! state assoc :current i)))
+        [tabs panels] (build-tabs-and-panels children on-click)]
     (r/create-class
      {:component-will-receive-props
       (fn [_ next-this]
