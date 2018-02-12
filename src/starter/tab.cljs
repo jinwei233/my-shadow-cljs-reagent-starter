@@ -25,18 +25,22 @@
 (defn tabs []
   (let [this (r/current-component)
         props (get-props this)
-        {:keys [active on-change]} props
+        {:keys [active on-before-change on-change]} props
         state (r/atom {:current active})
         children (get-children this)
         [[_ & tabs0] [_ & panels0]] children
-        f-on-click #(let [index (-> (.-currentTarget %1)
-                                    (.getAttribute "data-index"))
-                          i (js/parseInt index 10)
-                          j (:current @state)]
-                      (when (not (= i j))
-                        (when on-change (on-change j i))
-                        (swap! state assoc :current i)))
-        tabs (map-indexed #(into [:a.ui-tab-item {:data-index %1 :on-click f-on-click}] (rest %2)) tabs0)
+        on-click #(let [index (-> (.-currentTarget %1)
+                                  (.getAttribute "data-index"))
+                        i (js/parseInt index 10)
+                        j (:current @state)]
+                    (when (not (= i j))
+                      (if on-before-change
+                        (when (on-before-change i j)
+                          (when on-change
+                            (on-change i j)))
+                        (when on-change
+                          (on-change i j)))))
+        tabs (map-indexed #(into [:a.ui-tab-item {:data-index %1 :on-click on-click}] (rest %2)) tabs0)
         panels (map-indexed #(into [:div.ui-tab-panel] (rest %2)) panels0)]
     (r/create-class
      {:component-will-receive-props
@@ -59,8 +63,9 @@
 (defn tabs-demo []
   "demo to test updates"
   (let [active (r/atom 0)
-        on-change #(do (println "old=" %1 "new=" %2)
-                       (reset! active %2))]
+        on-before-change #(if (= 1 %1) false true)
+        on-change #(do (println "old=" %2 "new=" %1)
+                       (reset! active %1))]
     (r/create-class
      {:component-did-mount
       (fn [] (js/setTimeout (fn []
@@ -68,7 +73,7 @@
       :display-name "app"
       :reagent-render
       (fn []
-        [tabs {:active @active :on-change on-change}
+        [tabs {:active @active :on-before-change on-before-change :on-change on-change}
          [:tab-items
           [:tab-item [:span {:key "A"} "A"]]
           [:tab-item [:span {:key "B"} "B"]]]
