@@ -61,16 +61,16 @@
             (swap! state assoc :current active))))
       :display-name "ui-tab"
       :reagent-render
-      (fn []
+      (fn [{:keys [center?]}]
         (into
          [:div.ui-tab]
-         [(into [:div.ui-tab-items]
+         [(into [:div.ui-tab-items {:class [(when center? "center")]}]
                 (add-active-class tabs (:current @state)))
           (into [:div.ui-tab-panels]
                 (add-active-class panels (:current @state)))]))})))
 
-(defn tabs-demo []
-  "demo to test updates"
+(defn tabs-demo-dynamic []
+  "动态的 tab panel"
   (let [active (r/atom 0)
         on-before-change #(if (= 1 %1) false true)
         on-change #(do (println "old=" %2 "new=" %1)
@@ -87,3 +87,45 @@
            ~@(map #(identity [:tab-item ^{:key %1} [:div %1]]) ["A" "B" "C"])]
          `[:tab-panels
            ~@(map #(identity [:tab-panel ^{:key %1} [:div %1]]) ["Panel A" "Panel B" "Panel C"])]])})))
+
+(defn tabs-demo-nest []
+  "嵌套的 tab"
+  [tabs {:active 0}
+   [:tab-items
+    [:tab-item [:div {:key "A"} "A"]]
+    [:tab-item [:div {:key "B"} "B"]]]
+   [:tab-panels
+    [:tab-panel
+     [:div
+      [:p "Panel A"]
+      [:p "Very long"]
+      [:p "Very long"]
+      [:p "Very long"]]]
+    [:tab-panel
+     [tabs {:active 1}
+      [:tab-items
+       [:tab-item [:div {:key "C"} "C"]]
+       [:tab-item [:div {:key "D"} "D"]]]
+      [:tab-panels
+       [:tab-panel [:div {:key "C"} "Panel C"]]
+       [:tab-panel [:div {:key "D"} "Panel D"]]]]]]])
+
+(defn tabs-demo []
+  "嵌套的 tab"
+  [tabs {:active 0 :center? true}
+   [:tab-items
+    [:tab-item [:div {:key "A"} "A"]]
+    [:tab-item [:div {:key "B"} "B"]]]
+   [:tab-panels
+    [:tab-panel
+     [:div
+      [:p "Panel A"]
+      [:p "Very long"]
+      [:p "Very long"]
+      [:p "Very long"]]]
+    [:tab-panel
+     [:div
+      [:p "Panel B"]
+      [:p "Very long"]
+      [:p "Very long"]
+      [:p "Very long"]]]]])

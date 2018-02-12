@@ -2,11 +2,27 @@
   border: 1px solid #ccc;
 }
 
+.ui-tab-items {
+  border-bottom: 1px solid #ccc;
+}
+
+.ui-tab-items.center {
+  text-align: center;
+  display: flex;
+}
+
+.ui-tab-items.center > a.ui-tab-item {
+  flex: 1;
+}
+
+.ui-tab-items.center > a.ui-tab-item:last-child {
+  border-right: 0;
+}
+
 a.ui-tab-item {
   display: inline-block;
   padding: 5px 20px;
   border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
 }
 
 a.ui-tab-item:last-child {
@@ -20,6 +36,7 @@ a.ui-tab-item.active {
 
 .ui-tab-panel {
   display: none;
+  padding: 10px;
 }
 
 .ui-tab-panel.active {
