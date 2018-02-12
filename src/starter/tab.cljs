@@ -73,11 +73,8 @@
       :display-name "app"
       :reagent-render
       (fn []
-        [tabs {:active @active :on-before-change on-before-change :on-change on-change}
-         [:tab-items
-          [:tab-item [:span {:key "A"} "A"]]
-          [:tab-item [:span {:key "B"} "B"]]]
-         [:tab-panels
-          [:tab-panel "C"]
-          [:tab-panel "D"]]])})))
-    
+        [tabs {:active @active :on-change on-change}
+         `[:tab-items
+           ~@(map #(identity [:tab-item ^{:key %1} [:div %1]]) ["A" "B" "C"])]
+         `[:tab-panels
+           ~@(map #(identity [:tab-panel ^{:key %1} [:div %1]]) ["Panel A" "Panel B" "Panel C"])]])})))
